@@ -24,6 +24,8 @@ func Agent_adding():
 		agent_instance.position.x = pos_x
 		agent_instance.position.y = pos_y
 		
+		agent_instance.name = "agent"+str(i+1)
+		
 		add_child(agent_instance)
 
 func Meal_adding():

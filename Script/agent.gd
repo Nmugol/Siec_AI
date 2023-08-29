@@ -1,6 +1,9 @@
 extends RigidBody2D
 
 @export var speed = 100  # Prędkość przeciwnika
+@export var eat_meal = 0
+
+var widow_size= DisplayServer.window_get_size()
 
 var direction = Vector2.ZERO  # Kierunek ruchu przeciwnika
 var change_direction_interval = 2.0  # Interwał zmiany kierunku w sekundach
@@ -11,7 +14,9 @@ func _physics_process(delta):
 	time_since_direction_change += delta
 	
 	# Jeśli czas od ostatniej zmiany kierunku przekroczył interwał, losujemy nowy kierunek
-	if time_since_direction_change >= change_direction_interval:
+	var boarder_x:bool = position.x <= 32 or position.x >= widow_size.x-32
+	var boarder_y:bool = position.y <= 32 or position.y >= widow_size.y-32
+	if time_since_direction_change >= change_direction_interval or boarder_x or boarder_y:
 		change_direction()
 		time_since_direction_change = 0.0
 	
