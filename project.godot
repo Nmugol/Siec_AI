@@ -13,7 +13,13 @@ config_version=5
 config/name="Siec_AI"
 run/main_scene="res://Scenes/world.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+run/max_fps=1
 config/icon="res://icon.svg"
+
+[autoload]
+
+SaveData="*res://Script/Save_data.gd"
+DataInput="*res://Script/Data_input.gd"
 
 [display]
 
