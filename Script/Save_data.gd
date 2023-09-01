@@ -4,6 +4,7 @@ class Agent:
 	var id:int = 0
 	var x_positions = []
 	var y_positions = []
+	var end_pos:Vector2 = Vector2(0,0)
 	var eat:int = 0
 	var score:float = 0.0
 	pass
@@ -25,6 +26,7 @@ func add_agent_to_list(id:int):
 func add_agent_position(pos_x:float,pos_y:float,id:int):
 	Agent_list[id].x_positions.append(pos_x)
 	Agent_list[id].y_positions.append(pos_y)
+	Agent_list[id].end_pos = Vector2(pos_x,pos_y)
 	pass
 	
 func add_eaten_meals(id:int):
@@ -37,3 +39,22 @@ func add_meal_position(pos:Vector2):
 	Meal_list.append(new_meal)
 	new_meal=null
 	pass
+
+func calculates_the_score():
+	for i in range(DataInput.how_many_agent):
+		Agent_list[i].score = Agent_list[i].eat + 1/nearest_meal(Agent_list[i].end_pos.x,Agent_list[i].end_pos.y)
+		pass
+	pass
+
+func nearest_meal(x:float,y:float):
+	if Meal_list.size() == 0:
+		return 0.0
+	else:
+		var distans = []
+		for i in range(Meal_list.size()):
+			var x_dis = pow((x-Meal_list[i].positions.x),2)
+			var y_dis = pow((y-Meal_list[i].positions.y),2)
+			distans.append(sqrt(x_dis+y_dis))
+			pass
+		distans.sort()
+		return distans[0]
