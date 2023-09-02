@@ -1,7 +1,12 @@
 extends Area2D
 
-func _ready():
-	$Timer.wait_time = DataInput.time_out
+var frame_counter:int = 0
+
+func _process(delta):
+	if frame_counter == DataInput.how_many_frame:
+		SaveData.add_meal_position(self.position)
+		pass
+	frame_counter+=1
 	pass
 
 
@@ -14,8 +19,3 @@ func _on_body_entered(body):
 		#Remove a meal from a scene
 		queue_free()
 	pass
-
-
-func _on_timer_timeout():
-	SaveData.add_meal_position(self.position)
-	pass # Replace with function body.

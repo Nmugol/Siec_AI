@@ -4,8 +4,8 @@ extends RigidBody2D
 
 
 var direction = Vector2.ZERO
-var change_direction_interval = DataInput.max_move_time  
-var time_since_direction_change = DataInput.max_move_time
+var change_direction_interval = DataInput.next_move
+var time_since_direction_change = DataInput.next_move
 
 func _physics_process(delta):
 	

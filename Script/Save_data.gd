@@ -1,5 +1,7 @@
 extends Node
 
+var generation_live:bool = true
+
 class Agent:
 	var id:int = 0
 	var x_positions = []
@@ -62,12 +64,12 @@ func nearest_meal(x:float,y:float):
 func save_agent_data():
 	var save_game = FileAccess.open("user://entity_position_out.txt",FileAccess.WRITE)
 	for i in range(DataInput.how_many_agent):
-		var name = "#ID#var_int_"+str(Agent_list[i].id)
+		var agent = "#ID#var_int_"+str(Agent_list[i].id)
 		var ls = Agent_list[i].x_positions.size()
 		for j in range(ls):
 			var x = "var_float_"+str(Agent_list[i].x_positions[j])
 			var y = "var_float_"+str(Agent_list[i].y_positions[j])
-			var save_line = name+"\n"+x+"\n"+y
+			var save_line = agent+"\n"+x+"\n"+y
 			save_game.store_line(save_line)
 			pass
 		pass
@@ -75,9 +77,11 @@ func save_agent_data():
 	
 	save_game = FileAccess.open("user://entity_score.txt",FileAccess.WRITE)
 	for i in range(DataInput.how_many_agent):
-		var name = "#ID#var_int_"+str(Agent_list[i].id)
+		var agent = "#ID#var_int_"+str(Agent_list[i].id)
 		var scor = "var_float_"+str(Agent_list[i].score)
-		var save_line = name+"\n"+scor
+		var save_line = agent+"\n"+scor
 		save_game.store_line(save_line)
 		pass
+		
+	generation_live=false
 	pass
