@@ -8,5 +8,11 @@
 [node name="Agents" type="Node2D" parent="."]
 script = ExtResource("3_tso6g")
 
+[node name="Timer" type="Timer" parent="Agents"]
+one_shot = true
+autostart = true
+
 [node name="Meals" type="Node2D" parent="."]
 script = ExtResource("4_cwc86")
+
+[connection signal="timeout" from="Agents/Timer" to="Agents" method="_on_timer_timeout"]

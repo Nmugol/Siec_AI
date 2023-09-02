@@ -3,6 +3,8 @@ extends Node2D
 @onready var Agent_sece = preload("res://Scenes/agent.tscn")
 
 func _ready():
+	$Timer.wait_time = DataInput.time_out
+	
 	for i in range(DataInput.how_many_agent):
 		var agent_instance = Agent_sece.instantiate()
 		
@@ -16,4 +18,10 @@ func _ready():
 		# Add an object to a scene
 		add_child(agent_instance)
 		SaveData.add_agent_to_list(agent_instance.name.to_int())
+	pass # Replace with function body.
+
+
+func _on_timer_timeout():
+	SaveData.calculates_the_score()
+	SaveData.save_agent_data()
 	pass # Replace with function body.

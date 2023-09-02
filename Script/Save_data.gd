@@ -42,7 +42,7 @@ func add_meal_position(pos:Vector2):
 
 func calculates_the_score():
 	for i in range(DataInput.how_many_agent):
-		Agent_list[i].score = Agent_list[i].eat + 1/nearest_meal(Agent_list[i].end_pos.x,Agent_list[i].end_pos.y)
+		Agent_list[i].score = Agent_list[i].eat + nearest_meal(Agent_list[i].end_pos.x,Agent_list[i].end_pos.y)
 		pass
 	pass
 
@@ -57,4 +57,27 @@ func nearest_meal(x:float,y:float):
 			distans.append(sqrt(x_dis+y_dis))
 			pass
 		distans.sort()
-		return distans[0]
+		return 1/distans[0]
+
+func save_agent_data():
+	var save_game = FileAccess.open("user://entity_position_out.txt",FileAccess.WRITE)
+	for i in range(DataInput.how_many_agent):
+		var name = "#ID#var_int_"+str(Agent_list[i].id)
+		var ls = Agent_list[i].x_positions.size()
+		for j in range(ls):
+			var x = "var_float_"+str(Agent_list[i].x_positions[j])
+			var y = "var_float_"+str(Agent_list[i].y_positions[j])
+			var save_line = name+"\n"+x+"\n"+y
+			save_game.store_line(save_line)
+			pass
+		pass
+	save_game.close()
+	
+	save_game = FileAccess.open("user://entity_score.txt",FileAccess.WRITE)
+	for i in range(DataInput.how_many_agent):
+		var name = "#ID#var_int_"+str(Agent_list[i].id)
+		var scor = "var_float_"+str(Agent_list[i].score)
+		var save_line = name+"\n"+scor
+		save_game.store_line(save_line)
+		pass
+	pass
