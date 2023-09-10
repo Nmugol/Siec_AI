@@ -12,6 +12,8 @@ func _ready():
 		agent_instance.position.x = randf_range(DataInput.spritr_radius,DataInput.widow_size.x-DataInput.spritr_radius)
 		agent_instance.position.y = randf_range(DataInput.spritr_radius,DataInput.widow_size.y-DataInput.spritr_radius)
 		
+		agent_instance.scale.x = DataInput.scale_x
+		agent_instance.scale.y = DataInput.scale_y
 		# Set object name
 		agent_instance.name = str(i)
 		
